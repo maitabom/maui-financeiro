@@ -24,7 +24,7 @@
 		<ApplicationTitle>Financeiro</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.financeiro</ApplicationId>
+		<ApplicationId>com.valentim.financeiro</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
