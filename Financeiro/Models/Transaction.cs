@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LiteDB;
 
 namespace Financeiro.Models;
 
 public class Transaction
 {
+    [BsonId]
     public int Id { get; set; }
     public TransactionType Type { get; set; }
     public required String Name { get; set; }
