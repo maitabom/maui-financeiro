@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Financeiro.Repositories;
+using LiteDB;
+using Microsoft.Extensions.Logging;
 
 namespace Financeiro
 {
@@ -9,6 +11,7 @@ namespace Financeiro
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .RegisterDatabaseRepositories()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -20,6 +23,17 @@ namespace Financeiro
 #endif
 
             return builder.Build();
+        }
+
+        public static MauiAppBuilder RegisterDatabaseRepositories(this MauiAppBuilder builder)
+        {
+            builder.Services.AddSingleton<LiteDatabase>(options =>
+            {
+                return new LiteDatabase($"Filename={AppSettings.DatabasePath}; Connection=Shared;");
+            });
+
+            builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
+            return builder;
         }
     }
 }

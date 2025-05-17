@@ -8,9 +8,9 @@ public class TransactionRepository : ITransactionRepository
     private readonly LiteDatabase _database;
     private readonly string _collectionName = "transactions";
 
-    public TransactionRepository()
+    public TransactionRepository(LiteDatabase database)
     {
-        _database = new LiteDatabase("Filename=Financial.db; Connection=Shared;");
+        _database = database;
     }
 
     public List<Transaction> GetAll()
