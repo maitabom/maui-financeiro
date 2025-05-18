@@ -3,11 +3,28 @@
     x:Class="Financeiro.Views.TransactionNew"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="TransactionNew">
+    Title="Nova Transação">
     <VerticalStackLayout>
-        <Label
-            HorizontalOptions="Center"
-            Text="Nova Transação"
-            VerticalOptions="Center" />
+        <Border
+            Margin="15"
+            Padding="15"
+            BackgroundColor="Black"
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 30">
+            <Grid ColumnDefinitions="*, 30" RowDefinitions="Auto">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="Center"
+                    Text="Nova Transação"
+                    TextColor="White" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Text="X"
+                    TextColor="White" />
+            </Grid>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>
