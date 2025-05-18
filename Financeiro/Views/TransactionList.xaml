@@ -9,5 +9,10 @@
             HorizontalOptions="Center"
             Text="Lista de Transações"
             VerticalOptions="Center" />
+
+        <Button
+            x:Name="btnAdd"
+            Clicked="btnAdd_Clicked"
+            Text="+" />
     </VerticalStackLayout>
 </ContentPage>
