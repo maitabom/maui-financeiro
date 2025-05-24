@@ -1,12 +1,46 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Financeiro.Views.TransactionEdit"
-             Title="TransactionEdit">
+<ContentPage
+    x:Class="Financeiro.Views.TransactionEdit"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Edição de Transação">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="10">
+            <Border
+                Margin="15"
+                Padding="15"
+                BackgroundColor="Black"
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 30">
+                <Grid ColumnDefinitions="*, 30" RowDefinitions="Auto">
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        Text="Edição de Transação"
+                        TextColor="White" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        Text="X"
+                        TextColor="White" />
+                </Grid>
+            </Border>
+            <Grid Margin="30,0" ColumnDefinitions="*, *">
+                <RadioButton
+                    Grid.Column="0"
+                    Content="Receita"
+                    IsChecked="True" />
+                <RadioButton
+                    Grid.Column="1"
+                    Content="Despesa"
+                    HorizontalOptions="End" />
+            </Grid>
+            <Entry Margin="15,0" Placeholder="Nome da transação" />
+            <DatePicker Margin="15,0" />
+            <Entry Margin="15,0" Placeholder="Valor da transação" />
+            <Button Margin="15,0" Text="Salvar" />
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -3,7 +3,7 @@
     x:Class="Financeiro.Views.TransactionList"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="TransactionList">
+    Title="Lista de Transações">
     <VerticalStackLayout>
         <Label
             HorizontalOptions="Center"
@@ -14,5 +14,9 @@
             x:Name="btnAdd"
             Clicked="btnAdd_Clicked"
             Text="+" />
+        <Button
+            x:Name="btnEdit"
+            Clicked="btnEdit_Clicked"
+            Text="Editar" />
     </VerticalStackLayout>
 </ContentPage>

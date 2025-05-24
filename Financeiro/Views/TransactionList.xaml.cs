@@ -9,9 +9,11 @@ public partial class TransactionList : ContentPage
 
     private void btnAdd_Clicked(object sender, EventArgs e)
     {
-        if (Application.Current?.Windows.FirstOrDefault() is { } mainWindow)
-        {
-            mainWindow.Page = new TransactionNew();
-        }
+        Navigation.PushModalAsync(new TransactionNew());
+    }
+
+    private void btnEdit_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushModalAsync(new TransactionEdit());
     }
 }
