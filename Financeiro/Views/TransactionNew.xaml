@@ -17,13 +17,20 @@
                     Grid.Column="0"
                     HorizontalOptions="Center"
                     Text="Nova Transação"
-                    TextColor="White" />
-                <Label
+                    TextColor="White"
+                    VerticalOptions="Center" />
+
+                <Image
+                    x:Name="imaClose"
                     Grid.Row="0"
                     Grid.Column="1"
-                    HorizontalOptions="Center"
-                    Text="X"
-                    TextColor="White" />
+                    HeightRequest="17"
+                    Source="close.png"
+                    WidthRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="imaClose_Tapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
         </Border>
         <Grid Margin="30,0" ColumnDefinitions="*, *">

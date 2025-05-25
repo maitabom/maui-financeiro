@@ -6,4 +6,9 @@ public partial class TransactionNew : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void imaClose_Tapped(object sender, TappedEventArgs e)
+    {
+		Navigation.PopModalAsync();
+    }
 }
