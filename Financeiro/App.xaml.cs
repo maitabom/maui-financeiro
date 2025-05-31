@@ -4,14 +4,18 @@ namespace Financeiro
 {
     public partial class App : Application
     {
-        public App()
+        private readonly TransactionList _transactionListPage;
+
+        public App(TransactionList listPage)
         {
+            _transactionListPage = listPage;
             InitializeComponent();
+
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new NavigationPage(new TransactionList()));
+            return new Window(new NavigationPage(_transactionListPage));
         }
     }
 }

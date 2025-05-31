@@ -37,6 +37,7 @@
         </Border>
         <Label
             x:Name="lblError"
+            Margin="30,0"
             IsVisible="False"
             TextColor="Red" />
         <Grid Margin="30,0" ColumnDefinitions="*, *">
@@ -55,7 +56,6 @@
             x:Name="txtName"
             Margin="15,0"
             Placeholder="Nome da transação" />
-        <DatePicker Margin="15,0" />
         <Entry
             x:Name="txtValue"
             Margin="15,0"

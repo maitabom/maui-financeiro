@@ -9,5 +9,5 @@ public class Transaction
     public TransactionType Type { get; set; }
     public required String Name { get; set; }
     public DateTimeOffset Date { get; set; }
-    public Decimal Value { get; set; }
+    public Double Value { get; set; }
 }

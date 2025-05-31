@@ -1,12 +1,17 @@
+using Financeiro.Models;
+using Financeiro.Repositories;
 using System.Text;
 
 namespace Financeiro.Views;
 
 public partial class TransactionNew : ContentPage
 {
-	public TransactionNew()
+	private readonly ITransactionRepository _repository;
+
+    public TransactionNew(ITransactionRepository repository)
 	{
 		InitializeComponent();
+        _repository = repository;
 	}
 
     private void ContentPage_Loaded(object sender, EventArgs e)
@@ -21,7 +26,24 @@ public partial class TransactionNew : ContentPage
 
     private void btnSave_Clicked(object sender, EventArgs e)
     {
+        if (!Validate()) return;
 
+        SaveData();
+
+        Navigation.PopModalAsync();
+    }
+
+    private void SaveData()
+    {
+        Transaction transaction = new Transaction()
+        {
+            Type = rdbIncome.IsChecked ? TransactionType.Income : TransactionType.Expense,
+            Date = dtpDate.Date,
+            Name = txtName.Text.Trim(),
+            Value = Double.Parse(txtValue.Text.Trim())
+        };
+
+        _repository.Add(transaction);
     }
 
     private bool Validate()
@@ -43,7 +65,7 @@ public partial class TransactionNew : ContentPage
 
         double result;
 
-        if (!Double.TryParse(txtValue.Text, out result))
+        if (!String.IsNullOrEmpty(txtValue.Text) && !Double.TryParse(txtValue.Text, out result))
         {
             error.AppendLine("O campo Valor deve ser um número válido.");
             isValid = false;

@@ -12,6 +12,7 @@ namespace Financeiro
             builder
                 .UseMauiApp<App>()
                 .RegisterDatabaseRepositories()
+                .RegisterViews()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -33,6 +34,14 @@ namespace Financeiro
             });
 
             builder.Services.AddTransient<ITransactionRepository, TransactionRepository>();
+            return builder;
+        }
+
+        public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
+        {
+            builder.Services.AddTransient<Views.TransactionList>();
+            builder.Services.AddTransient<Views.TransactionNew>();
+            builder.Services.AddTransient<Views.TransactionEdit>();
             return builder;
         }
     }
