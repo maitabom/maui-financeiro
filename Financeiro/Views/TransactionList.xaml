@@ -4,32 +4,40 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     Title="Lista de Transações"
+    Loaded="ContentPage_Loaded"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary Source="/Resources/Styles/Colors.xaml" />
     </ContentPage.Resources>
 
     <VerticalStackLayout>
-        <Grid Padding="10" ColumnDefinitions="50,*,Auto">
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                BackgroundColor="White"
-                FontSize="20"
-                HorizontalOptions="Center"
-                Text="S"
-                VerticalOptions="Center" />
-            <VerticalStackLayout Grid.Row="0" Grid.Column="1">
-                <Label Text="Transação" />
-                <Label Text="Data" />
-            </VerticalStackLayout>
-            <Label
-                Grid.Row="0"
-                Grid.Column="2"
-                Text="R$ 3.600,00"
-                TextColor="{StaticResource Tertiary}"
-                VerticalOptions="Center" />
-        </Grid>
+        <CollectionView x:Name="clvTransacions">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="50,*,Auto">
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            BackgroundColor="White"
+                            FontSize="20"
+                            HorizontalOptions="Center"
+                            Text="S"
+                            VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                            <Label Text="{Binding Name}" />
+                            <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" />
+                        </VerticalStackLayout>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Text="{Binding Value, StringFormat='{0:C}'}"
+                            TextColor="{StaticResource Tertiary}"
+                            VerticalOptions="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
 
 
         <Button

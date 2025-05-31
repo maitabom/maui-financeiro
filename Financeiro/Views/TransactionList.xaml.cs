@@ -1,25 +1,45 @@
+using Financeiro.Repositories;
+
 namespace Financeiro.Views;
 
 public partial class TransactionList : ContentPage
 {
-    private readonly TransactionNew _transactionAddPage;
-    private readonly TransactionEdit _transactionEditPage;
+    private readonly ITransactionRepository _transactionRepository;
 
-    public TransactionList(TransactionNew transactionAdd, TransactionEdit transactionEdit)
+    public TransactionList(ITransactionRepository repository)
     {
-        _transactionAddPage = transactionAdd;
-        _transactionEditPage = transactionEdit;
+        _transactionRepository = repository;
 
         InitializeComponent();
     }
 
+    private void ContentPage_Loaded(object sender, EventArgs e)
+    {
+        var list = _transactionRepository.GetAll();
+        clvTransacions.ItemsSource = list;
+    }
+
     private void btnAdd_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushModalAsync(_transactionAddPage);
+        if (Handler?.MauiContext?.Services.GetService<TransactionNew>() is TransactionNew transactionAdd)
+        {
+            Navigation.PushModalAsync(transactionAdd);
+        }
+        else
+        {
+            DisplayAlert("Erro", "Não foi possível inicializar a página de nova transação.", "OK");
+        }
     }
 
     private void btnEdit_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushModalAsync(_transactionEditPage);
+        if (Handler?.MauiContext?.Services.GetService<TransactionEdit>() is TransactionEdit transactionEdit)
+        {
+            Navigation.PushModalAsync(transactionEdit);
+        }
+        else
+        {
+            DisplayAlert("Erro", "Não foi possível inicializar a página de nova transação.", "OK");
+        }
     }
 }

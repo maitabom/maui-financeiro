@@ -1,4 +1,5 @@
 ﻿using Financeiro.Views;
+using System.Globalization;
 
 namespace Financeiro
 {
@@ -11,6 +12,11 @@ namespace Financeiro
             _transactionListPage = listPage;
             InitializeComponent();
 
+            var culture = new CultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
