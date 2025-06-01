@@ -37,11 +37,20 @@ public partial class TransactionList : ContentPage
         }
     }
 
-    private void btnEdit_Clicked(object sender, EventArgs e)
+    private void GridItemTransaction_Tapped(object sender, TappedEventArgs e)
     {
+
         if (Handler?.MauiContext?.Services.GetService<TransactionEdit>() is TransactionEdit transactionEdit)
         {
-            Navigation.PushModalAsync(transactionEdit);
+            var grid = (Grid)sender;
+            var recognizer = (TapGestureRecognizer)grid.GestureRecognizers[0];
+            var transaction = recognizer.CommandParameter as Transaction;
+
+            if (transaction != null) 
+            {
+                transactionEdit.SetTransaction(transaction);
+                Navigation.PushModalAsync(transactionEdit);
+            }
         }
         else
         {
@@ -53,5 +62,15 @@ public partial class TransactionList : ContentPage
     {
         var list = _transactionRepository.GetAll();
         clvTransacions.ItemsSource = list;
+
+        var total = list.Sum(x => x.Type == TransactionType.Income ? x.Value : -x.Value);
+        var incomes = list.Where(x => x.Type == TransactionType.Income).Sum(x => x.Value);
+        var expenses = list.Where(x => x.Type == TransactionType.Expense).Sum(x => x.Value);
+
+        lblBalance.Text = total.ToString("C2");
+        lblIncome.Text = incomes.ToString("C2");   
+        lblExpense.Text = expenses.ToString("C2");
     }
+
+    
 }

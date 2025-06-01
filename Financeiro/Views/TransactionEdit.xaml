@@ -35,17 +35,25 @@
             </Border>
             <Grid Margin="30,0" ColumnDefinitions="*, *">
                 <RadioButton
+                    x:Name="rdbIncome"
                     Grid.Column="0"
                     Content="Receita"
                     IsChecked="True" />
                 <RadioButton
+                    x:Name="rdbExpense"
                     Grid.Column="1"
                     Content="Despesa"
                     HorizontalOptions="End" />
             </Grid>
-            <Entry Margin="15,0" Placeholder="Nome da transação" />
-            <DatePicker Margin="15,0" />
-            <Entry Margin="15,0" Placeholder="Valor da transação" />
+            <Entry
+                x:Name="txtName"
+                Margin="15,0"
+                Placeholder="Nome da transação" />
+            <Entry
+                x:Name="txtValue"
+                Margin="15,0"
+                Placeholder="Valor da transação" />
+            <DatePicker x:Name="dtpDate" Margin="15,0" />
             <Button Margin="15,0" Text="Salvar" />
         </VerticalStackLayout>
     </VerticalStackLayout>

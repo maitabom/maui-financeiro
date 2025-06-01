@@ -15,6 +15,9 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid Padding="10" ColumnDefinitions="50,*,Auto">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="GridItemTransaction_Tapped" />
+                        </Grid.GestureRecognizers>
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
@@ -37,15 +40,6 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-
-
-        <Button
-            x:Name="btnEdit"
-            Clicked="btnEdit_Clicked"
-            HorizontalOptions="Center"
-            Text="Editar" />
-
         <Border
             Margin="10"
             Padding="15"
@@ -60,11 +54,11 @@
                     Text="Saldo"
                     TextColor="#979797" />
                 <Label
+                    x:Name="lblBalance"
                     Grid.Row="1"
                     Grid.Column="0"
                     FontAttributes="Bold"
                     FontSize="36"
-                    Text="R$ 2.760,00"
                     TextColor="{StaticResource White}" />
                 <Button
                     x:Name="btnAdd"
@@ -88,9 +82,9 @@
                     Text="Receitas"
                     TextColor="#979797" />
                 <Label
+                    x:Name="lblIncome"
                     Grid.Row="4"
                     Grid.Column="0"
-                    Text="R$ 3.600,00"
                     TextColor="{StaticResource White}" />
 
                 <Label
@@ -100,9 +94,9 @@
                     Text="Despesas"
                     TextColor="#979797" />
                 <Label
+                    x:Name="lblExpense"
                     Grid.Row="4"
                     Grid.Column="1"
-                    Text="R$ 800,00"
                     TextColor="{StaticResource White}" />
             </Grid>
         </Border>
