@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.Messaging;
+using Financeiro.Models;
 using Financeiro.Repositories;
 
 namespace Financeiro.Views;
@@ -15,8 +17,12 @@ public partial class TransactionList : ContentPage
 
     private void ContentPage_Loaded(object sender, EventArgs e)
     {
-        var list = _transactionRepository.GetAll();
-        clvTransacions.ItemsSource = list;
+        LoadData();
+
+        WeakReferenceMessenger.Default.Register<Transaction>(this, (sender, message) =>
+        {
+            LoadData();
+        });
     }
 
     private void btnAdd_Clicked(object sender, EventArgs e)
@@ -41,5 +47,11 @@ public partial class TransactionList : ContentPage
         {
             DisplayAlert("Erro", "Não foi possível inicializar a página de nova transação.", "OK");
         }
+    }
+
+    private void LoadData()
+    {
+        var list = _transactionRepository.GetAll();
+        clvTransacions.ItemsSource = list;
     }
 }

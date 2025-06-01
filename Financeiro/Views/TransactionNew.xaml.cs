@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using Financeiro.Models;
 using Financeiro.Repositories;
 using System.Text;
@@ -28,12 +29,13 @@ public partial class TransactionNew : ContentPage
     {
         if (!Validate()) return;
 
-        SaveData();
+        var transation = SaveData();
 
+        WeakReferenceMessenger.Default.Send<Transaction>(transation);
         Navigation.PopModalAsync();
     }
 
-    private void SaveData()
+    private Transaction SaveData()
     {
         Transaction transaction = new Transaction()
         {
@@ -44,6 +46,8 @@ public partial class TransactionNew : ContentPage
         };
 
         _repository.Add(transaction);
+
+        return transaction;
     }
 
     private bool Validate()
