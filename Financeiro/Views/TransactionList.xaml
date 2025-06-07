@@ -23,14 +23,22 @@
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="GridItemTransaction_Tapped" />
                         </Grid.GestureRecognizers>
-                        <Label
+                        <Border
                             Grid.Row="0"
                             Grid.Column="0"
                             BackgroundColor="White"
-                            FontSize="20"
-                            HorizontalOptions="Center"
-                            Text="S"
-                            VerticalOptions="Center" />
+                            HeightRequest="40"
+                            StrokeShape="RoundRectangle 20"
+                            WidthRequest="40">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="BorderLabelTransaction_Tapped" />
+                            </Border.GestureRecognizers>
+                            <Label
+                                FontSize="20"
+                                HorizontalOptions="Center"
+                                Text="S"
+                                VerticalOptions="Center" />
+                        </Border>
                         <VerticalStackLayout Grid.Row="0" Grid.Column="1">
                             <Label Text="{Binding Name}" />
                             <Label Text="{Binding Date, StringFormat='{0:dd/MM/yyyy}'}" />

@@ -58,6 +58,25 @@ public partial class TransactionList : ContentPage
         }
     }
 
+    private void BorderLabelTransaction_Tapped(object sender, TappedEventArgs e)
+    {
+        DisplayAlert("Excluir", "Deseja realmente excluir esta transação?", "Sim", "Não").ContinueWith(task => 
+        {
+            if (task.Result)
+            {
+                var border = (Border)sender;
+                var recognizer = (TapGestureRecognizer)border.GestureRecognizers[0];
+                var transaction = recognizer.CommandParameter as Transaction;
+
+                if (transaction != null)
+                {
+                    _transactionRepository.Delete(transaction);
+                    LoadData();
+                }
+            }
+        });
+    }
+
     private void LoadData()
     {
         var list = _transactionRepository.GetAll();
@@ -71,6 +90,4 @@ public partial class TransactionList : ContentPage
         lblIncome.Text = incomes.ToString("C2");   
         lblExpense.Text = expenses.ToString("C2");
     }
-
-    
 }
