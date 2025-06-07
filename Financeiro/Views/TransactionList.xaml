@@ -12,6 +12,8 @@
         <ResourceDictionary>
             <converter:TransactionValueConverter x:Key="TransactionValueConverter" />
             <converter:TransactionColortConverter x:Key="TransactionColorConverter" />
+            <converter:TransactionNameTextConverter x:Key="TransactionNameTextConverter" />
+            <converter:TransactionNameColorConverter x:Key="TransactionNameColorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -26,7 +28,7 @@
                         <Border
                             Grid.Row="0"
                             Grid.Column="0"
-                            BackgroundColor="White"
+                            BackgroundColor="{Binding Name, Converter={StaticResource TransactionNameColorConverter}}"
                             HeightRequest="40"
                             StrokeShape="RoundRectangle 20"
                             WidthRequest="40">
@@ -36,7 +38,7 @@
                             <Label
                                 FontSize="20"
                                 HorizontalOptions="Center"
-                                Text="S"
+                                Text="{Binding Name, Converter={StaticResource TransactionNameTextConverter}}"
                                 VerticalOptions="Center" />
                         </Border>
                         <VerticalStackLayout Grid.Row="0" Grid.Column="1">
