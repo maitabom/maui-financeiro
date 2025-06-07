@@ -33,6 +33,11 @@
                     </Image>
                 </Grid>
             </Border>
+            <Label
+                x:Name="lblError"
+                Margin="30,0"
+                IsVisible="False"
+                TextColor="Red" />
             <Grid Margin="30,0" ColumnDefinitions="*, *">
                 <RadioButton
                     x:Name="rdbIncome"
@@ -54,7 +59,11 @@
                 Margin="15,0"
                 Placeholder="Valor da transação" />
             <DatePicker x:Name="dtpDate" Margin="15,0" />
-            <Button Margin="15,0" Text="Salvar" />
+            <Button
+                x:Name="btnSave"
+                Margin="15,0"
+                Clicked="btnSave_Clicked"
+                Text="Salvar" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
