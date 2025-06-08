@@ -7,6 +7,9 @@ namespace Financeiro.Views;
 public partial class TransactionList : ContentPage
 {
     private readonly ITransactionRepository _transactionRepository;
+    private Color? _colorOrigin;
+    private string? _textOrigin;
+
 
     public TransactionList(ITransactionRepository repository)
     {
@@ -58,23 +61,29 @@ public partial class TransactionList : ContentPage
         }
     }
 
-    private void BorderLabelTransaction_Tapped(object sender, TappedEventArgs e)
+    private async void BorderLabelTransaction_Tapped(object sender, TappedEventArgs e)
     {
-        DisplayAlert("Excluir", "Deseja realmente excluir esta transação?", "Sim", "Não").ContinueWith(task => 
-        {
-            if (task.Result)
-            {
-                var border = (Border)sender;
-                var recognizer = (TapGestureRecognizer)border.GestureRecognizers[0];
-                var transaction = recognizer.CommandParameter as Transaction;
+        await AnimationBorder((Border)sender, true);
 
-                if (transaction != null)
-                {
-                    _transactionRepository.Delete(transaction);
-                    LoadData();
-                }
+        bool result = await DisplayAlert("Excluir", "Deseja realmente excluir esta transação?", "Sim", "Não");
+
+
+        if (result)
+        {
+            var border = (Border)sender;
+            var recognizer = (TapGestureRecognizer)border.GestureRecognizers[0];
+            var transaction = recognizer.CommandParameter as Transaction;
+
+            if (transaction != null)
+            {
+                _transactionRepository.Delete(transaction);
+                LoadData();
             }
-        });
+        }
+        else
+        {
+            await AnimationBorder((Border)sender, false);
+        }
     }
 
     private void LoadData()
@@ -89,5 +98,39 @@ public partial class TransactionList : ContentPage
         lblBalance.Text = total.ToString("C2");
         lblIncome.Text = incomes.ToString("C2");   
         lblExpense.Text = expenses.ToString("C2");
+    }
+
+    private async Task AnimationBorder(Border border, bool isDeleteAnimation)
+    {
+        if (isDeleteAnimation)
+        {
+            await border.RotateYTo(180, 1000);
+            _colorOrigin = border.BackgroundColor;
+
+            border.BackgroundColor = Colors.Red;
+            var label = border.Content as Label;
+
+            if (label != null)
+            {
+                _textOrigin = label.Text;
+
+                label.Text = "X";
+                label.TextColor = Colors.White;
+            }
+        }
+        else
+        {
+            await border.RotateYTo(0, 1000);
+
+            border.BackgroundColor = _colorOrigin ?? Colors.Transparent;
+
+            var label = border.Content as Label;
+
+            if (label != null && _textOrigin != null)
+            {
+                label.Text = _textOrigin;
+                label.TextColor = Colors.Black;
+            }
+        }
     }
 }
